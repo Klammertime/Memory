@@ -2,7 +2,7 @@
   "name": "memory",
   "version": "1.0.0",
   "description": "Memory project for JS for Programmers",
-  "main": "server.js",
+  "main": "index.js",
   "dependencies": {},
   "devDependencies": {
     "babel-cli": "^6.4.0"
@@ -10,6 +10,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
+    // "build": "babel src -d lib"
   },
   "repository": {
     "type": "git",
