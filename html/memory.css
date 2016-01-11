@@ -1,0 +1,54 @@
+body {
+    font: 300 16px/22px 'Lato', 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    text-align: center;
+    background: transparent linear-gradient(to right, #a1d3b0, #f6f1d3) repeat scroll 0 0;
+}
+
+h1 {
+    font-size: 48px;
+    font-weight: 100;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+}
+
+.card {
+    display: inline-block;
+    width: 75px;
+    height: 75px;
+    margin: 5px;
+    padding: 10px;
+    opacity: 1;
+    border: .5px solid rgb(41, 63, 80);
+}
+
+.matched {
+    display: inline-block;
+    width: 75px;
+    height: 75px;
+    margin: 5px;
+    padding: 10px;
+    transition: opacity 3s;
+    opacity: 0;
+    border: .5px solid rgb(41, 63, 80);
+}
+
+.play {
+    display: inline-block;
+    width: 455px;
+    height: 451px;
+    padding-top: 12px;
+    opacity: 1;
+    border: 1px solid rgb(100, 136, 128);
+}
+
+.win {
+    display: inline-block;
+    width: 474px;
+    height: 458px;
+    padding-top: 12px;
+    transition: opacity 3s;
+    opacity: 0;
+    border: 1px solid rgb(100, 136, 128);
+    background: #f6f1d3;
+}
