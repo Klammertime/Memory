@@ -1,6 +1,5 @@
 /*
- * CS 22 A - JavaScript for Programmers
- * Memory Matching Game
+ * Memory
  */
 'use strict';
 

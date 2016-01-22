@@ -1,8 +1,8 @@
 CACHE MANIFEST
-# version 3.7
+# version 3.9
 ../scripts/script.js
 ../scripts/jquery-1.11.3.js
-../html/main.css
+../styles/main.css
 ../img/robot29.svg
 ../img/robot30.svg
 ../img/robot26.svg
