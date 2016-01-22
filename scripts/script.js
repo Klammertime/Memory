@@ -8,35 +8,35 @@
 // with the corresponding alt attribute
 var sources = [
   {
-    file: 'robot29.svg',
+    file: 'img/robot29.svg',
     alt: 'robot29'
   },
   {
-    file: 'robot30.svg',
+    file: 'img/robot30.svg',
     alt: 'robot30'
   },
   {
-    file: 'robot26.svg',
+    file: 'img/robot26.svg',
     alt: 'robot26'
   },
   {
-    file: 'robot25.svg',
+    file: 'img/robot25.svg',
     alt: 'robot25'
   },
   {
-    file: 'robot22.svg',
+    file: 'img/robot22.svg',
     alt: 'robot22'
   },
   {
-    file: 'robot17.svg',
+    file: 'img/robot17.svg',
     alt: 'robot17'
   },
   {
-    file: 'robot21.svg',
+    file: 'img/robot21.svg',
     alt: 'robot21'
   },
   {
-    file: 'rounded46.svg',
+    file: 'img/rounded46.svg',
     alt: 'rounded46'
   },
 ];
@@ -113,7 +113,7 @@ function flipCard(event){
 }
 function flipBack(elementId){
   document.getElementById(elementId).alt = 'back';
-  document.getElementById(elementId).src = 'circuit4.svg';
+  document.getElementById(elementId).src = 'img/circuit4.svg';
 }
 function vanish(elementId){
   document.getElementById(elementId).className = 'matched';
