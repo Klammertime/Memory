@@ -16,7 +16,7 @@ gulp.task("build", function() {
     return gulp.src([
             "index.html",
             "memory.appcache",
-            "html/*",
+            "styles/*",
             "img/*",
             "scripts/*"
         ], {

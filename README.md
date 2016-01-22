@@ -6,7 +6,7 @@ Since this was created using ECMAScript 6, for the time being, view it in Firefo
 View it live here: http://klammertime.github.io/Memory/
 
 ## Project Assignemt
-**Foothills College: JavaScript for Programmers 
+**Foothills College - JavaScript for Programmers: 
 Build a Memory Game**
 
 Build a memory game using ECMAScript 6, Node.js and HTML5 application cache. 
