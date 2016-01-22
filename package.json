@@ -1,24 +1,27 @@
 {
-  "name": "memory",
-  "version": "1.0.0",
-  "description": "Memory project for JS for Programmers",
-  "main": "index.js",
-  "dependencies": {},
-  "devDependencies": {
-    "babel-cli": "^6.4.0"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Klammertime/Memory.git"
-  },
-  "author": "Audrey Klammer",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/Klammertime/Memory/issues"
-  },
-  "homepage": "https://github.com/Klammertime/Memory#readme"
+    "name": "memory",
+    "version": "1.0.0",
+    "description": "Memory project for JS for Programmers",
+    "main": "index.js",
+    "dependencies": {},
+    "devDependencies": {
+        "babel-cli": "^6.4.0",
+        "gulp": "^3.9.0",
+        "del": "^2.2.0",
+        "gulp-gh-pages": "^0.5.4"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node server.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Klammertime/Memory.git"
+    },
+    "author": "Audrey Klammer",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/Klammertime/Memory/issues"
+    },
+    "homepage": "https://github.com/Klammertime/Memory#readme"
 }

@@ -7,9 +7,9 @@ body {
 h1 {
     font-size: 48px;
     font-weight: 100;
+    margin-bottom: 40px;
     letter-spacing: .5px;
     text-transform: uppercase;
-    margin-bottom: 40px;
 }
 
 .card {
