@@ -5,57 +5,84 @@
 
 // Sources array contains images'file names with corresponding alt attribute.
 var sources = {
+    "birdFeathers": [
+        {
+            file: 'img/birdFeathers/bird152.svg',
+            alt: 'bird152'
+        }, {
+            file: 'img/birdFeathers/bird153.svg',
+            alt: 'bird153'
+        }, {
+            file: 'img/birdFeathers/bird154.svg',
+            alt: 'bird154'
+        }, {
+            file: 'img/birdFeathers/bird155.svg',
+            alt: 'bird155'
+        }, {
+            file: 'img/birdFeathers/bird156.svg',
+            alt: 'bird156'
+        }, {
+            file: 'img/birdFeathers/bird157.svg',
+            alt: 'bird157'
+        }, {
+            file: 'img/birdFeathers/bird158.svg',
+            alt: 'bird158'
+        }, {
+            file: 'img/birdFeathers/bird159.svg',
+            alt: 'bird159'
+        }
+    ],
     "robots": [
         {
-            file: 'img/robot29.svg',
+            file: 'img/robots/robot29.svg',
             alt: 'robot29'
         }, {
-            file: 'img/robot30.svg',
+            file: 'img/robots/robot30.svg',
             alt: 'robot30'
         }, {
-            file: 'img/robot26.svg',
+            file: 'img/robots/robot26.svg',
             alt: 'robot26'
         }, {
-            file: 'img/robot25.svg',
+            file: 'img/robots/robot25.svg',
             alt: 'robot25'
         }, {
-            file: 'img/robot22.svg',
+            file: 'img/robots/robot22.svg',
             alt: 'robot22'
         }, {
-            file: 'img/robot17.svg',
+            file: 'img/robots/robot17.svg',
             alt: 'robot17'
         }, {
-            file: 'img/robot21.svg',
+            file: 'img/robots/robot21.svg',
             alt: 'robot21'
         }, {
-            file: 'img/rounded46.svg',
+            file: 'img/robots/rounded46.svg',
             alt: 'rounded46'
         }
     ],
     "movies": [
         {
-            file: 'img/movie80.svg',
+            file: 'img/movies/movie80.svg',
             alt: 'movie80'
         }, {
-            file: 'img/movie81.svg',
+            file: 'img/movies/movie81.svg',
             alt: 'movie81'
         }, {
-            file: 'img/movie82.svg',
+            file: 'img/movies/movie82.svg',
             alt: 'movie82'
         }, {
-            file: 'img/movie83.svg',
+            file: 'img/movies/movie83.svg',
             alt: 'movie83'
         }, {
-            file: 'img/movie84.svg',
+            file: 'img/movies/movie84.svg',
             alt: 'movie84'
         }, {
-            file: 'img/movie85.svg',
+            file: 'img/movies/movie85.svg',
             alt: 'movie85'
         }, {
-            file: 'img/movie86.svg',
+            file: 'img/movies/movie86.svg',
             alt: 'movie86'
         }, {
-            file: 'img/movie87.svg',
+            file: 'img/movies/movie87.svg',
             alt: 'movie87'
         }
     ]
