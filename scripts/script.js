@@ -78,17 +78,19 @@ var deck = [];
 // Image object maps cards to an image in the sources array.
 var image = {};
 
+var cardCategory = "robots";
+
 function initGame() {
     // In deck: each image represented twice;
     // contains index of cooresponding image in sources array.
-    for (var i = 0; i < sources.movies.length; i++) {
+    for (var i = 0; i < sources[cardCategory].length; i++) {
         deck.push(i);
         deck.push(i);
     }
     // Shuffle deck array created above.
     deck.shuffle();
     // Assign an image (denoted by the index) to each card element.
-    for (var j = 0; j < 2 * sources.movies.length; j++) {
+    for (var j = 0; j < 2 * sources[cardCategory].length; j++) {
         image['card_' + j] = deck[j];
     }
 }
@@ -100,8 +102,8 @@ function flipCard(event) {
     if (event.target.className === 'card') {
         if (event.target.alt === 'back') {
             var imageIndex = image[event.target.id];
-            event.target.src = sources.movies[imageIndex].file;
-            event.target.alt = sources.movies[imageIndex].alt;
+            event.target.src = sources[cardCategory][imageIndex].file;
+            event.target.alt = sources[cardCategory][imageIndex].alt;
             if (!flipped) {
                 flipped = event.target.id;
             } else {
@@ -112,7 +114,7 @@ function flipCard(event) {
                     flipped = null;
                     matched++;
                     // If all cards have been matched, user wins.
-                    if (matched === sources.movies.length) {
+                    if (matched === sources[cardCategory].length) {
                         document.getElementById('board').className = 'win';
                         document.getElementById('message').textContent = 'All matched!';
                     }
@@ -143,3 +145,34 @@ function vanish(elementId) {
 
 // Register event handler.
 document.getElementById('board').addEventListener('click', flipCard, false);
+
+
+
+var handleDragStart = function(event) {
+    cardCategory = event.target.id; // Grab character ID from event.target
+    // document.body.className = event.target.id; // Set body class to class w/ same name as ID
+};
+
+var handleDragDrop = function(event) {
+    if (event.preventDefault) event.preventDefault();
+};
+
+// Neccessary to make drop work, weird but necessary.
+var handleDragOver = function(event) {
+    if (event.preventDefault) event.preventDefault();
+    return false;
+};
+
+/* Using characters element allows for event delegation and one event listeners
+instead of 5. Characters declared at top of app.js with all global variables.
+Event listener needs to be on dragstart for drag and drop to work. */
+document.getElementById('cardCategories').addEventListener('dragstart', function(event) {
+    handleDragStart(event);
+}, false);
+
+
+document.getElementById('board').addEventListener('dragover', handleDragOver, false);
+document.getElementById('board').addEventListener('drop', handleDragDrop, false);
+
+
+
