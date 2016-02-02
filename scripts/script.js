@@ -3,90 +3,36 @@
  */
 "use strict";
 
-// Sources array contains images'file names with corresponding alt attribute.
-var sources = {
-    "birdFeathers": [
-        {
-            file: 'img/birdFeathers/bird152.svg',
-            alt: 'bird152'
-        }, {
-            file: 'img/birdFeathers/bird153.svg',
-            alt: 'bird153'
-        }, {
-            file: 'img/birdFeathers/bird154.svg',
-            alt: 'bird154'
-        }, {
-            file: 'img/birdFeathers/bird155.svg',
-            alt: 'bird155'
-        }, {
-            file: 'img/birdFeathers/bird156.svg',
-            alt: 'bird156'
-        }, {
-            file: 'img/birdFeathers/bird157.svg',
-            alt: 'bird157'
-        }, {
-            file: 'img/birdFeathers/bird158.svg',
-            alt: 'bird158'
-        }, {
-            file: 'img/birdFeathers/bird159.svg',
-            alt: 'bird159'
-        }
-    ],
-    "robots": [
-        {
-            file: 'img/robots/robot29.svg',
-            alt: 'robot29'
-        }, {
-            file: 'img/robots/robot30.svg',
-            alt: 'robot30'
-        }, {
-            file: 'img/robots/robot26.svg',
-            alt: 'robot26'
-        }, {
-            file: 'img/robots/robot25.svg',
-            alt: 'robot25'
-        }, {
-            file: 'img/robots/robot22.svg',
-            alt: 'robot22'
-        }, {
-            file: 'img/robots/robot17.svg',
-            alt: 'robot17'
-        }, {
-            file: 'img/robots/robot21.svg',
-            alt: 'robot21'
-        }, {
-            file: 'img/robots/rounded46.svg',
-            alt: 'rounded46'
-        }
-    ],
-    "movies": [
-        {
-            file: 'img/movies/movie80.svg',
-            alt: 'movie80'
-        }, {
-            file: 'img/movies/movie81.svg',
-            alt: 'movie81'
-        }, {
-            file: 'img/movies/movie82.svg',
-            alt: 'movie82'
-        }, {
-            file: 'img/movies/movie83.svg',
-            alt: 'movie83'
-        }, {
-            file: 'img/movies/movie84.svg',
-            alt: 'movie84'
-        }, {
-            file: 'img/movies/movie85.svg',
-            alt: 'movie85'
-        }, {
-            file: 'img/movies/movie86.svg',
-            alt: 'movie86'
-        }, {
-            file: 'img/movies/movie87.svg',
-            alt: 'movie87'
-        }
-    ]
+// Sources array contains img'file names with corresponding alt attribute.
+
+var sources = [],
+    deck = [],
+    image = {},
+    Card,
+    card,
+    flipped,
+    matched;
+
+Card = function(category, file, alt) {
+    this.category = category;
+    this.file = file;
+    this.alt = alt;
 };
+
+card = new Card('feather', 'img/feather/feather2.svg', 'feather2');
+
+Card.prototype.createSources = function(category) {
+    var imgLocation,
+        imgAlt;
+    sources = [];
+    for (var i = 1; i < 9; i++) {
+        imgLocation = 'img/' + category + '/' + category + i + '.svg';
+        imgAlt = category + i;
+        sources.push(new Card(category, imgLocation, imgAlt));
+    }
+};
+
+card.createSources('feather');
 
 // Shuffle method called on any array to shuffle it in place.
 Array.prototype.shuffle = function() {
@@ -101,105 +47,101 @@ Array.prototype.shuffle = function() {
 };
 
 // Array deck represents cards.
-var deck = [];
+deck = [];
 // Image object maps cards to an image in the sources array.
-var image = {};
+image = {};
 
-var cardCategory = "robots";
-
-function initGame() {
+Card.prototype.initGame = function() {
     // In deck: each image represented twice;
     // contains index of cooresponding image in sources array.
-    for (var i = 0; i < sources[cardCategory].length; i++) {
+    for (var i = 0; i < sources.length; i++) {
         deck.push(i);
         deck.push(i);
     }
     // Shuffle deck array created above.
     deck.shuffle();
     // Assign an image (denoted by the index) to each card element.
-    for (var j = 0; j < 2 * sources[cardCategory].length; j++) {
+    for (var j = 0; j < 2 * sources.length; j++) {
         image['card_' + j] = deck[j];
     }
-}
-var flipped = null; // Last card flipped if still open.
-var matched = 0; // Number of pairs matched.
-initGame();
+};
+flipped = null; // Last card flipped if still open.
+matched = 0; // Number of pairs matched.
+card.initGame();
 
-function flipCard(event) {
+Card.prototype.flipBack = function(elementId) {
+    document.getElementById(elementId).alt = 'back';
+    document.getElementById(elementId).src = 'img/circuit4.svg';
+};
+
+Card.prototype.vanish = function(elementId) {
+    document.getElementById(elementId).className = 'matched';
+};
+
+Card.prototype.flipCard = function(event) {
     if (event.target.className === 'card') {
         if (event.target.alt === 'back') {
             var imageIndex = image[event.target.id];
-            event.target.src = sources[cardCategory][imageIndex].file;
-            event.target.alt = sources[cardCategory][imageIndex].alt;
+            event.target.src = sources[imageIndex].file;
+            event.target.alt = sources[imageIndex].alt;
             if (!flipped) {
                 flipped = event.target.id;
             } else {
                 if (image[flipped] === image[event.target.id]) {
                     // Match found.
-                    vanish(flipped);
-                    vanish(event.target.id);
+                    card.vanish(flipped);
+                    card.vanish(event.target.id);
                     flipped = null;
                     matched++;
                     // If all cards have been matched, user wins.
-                    if (matched === sources[cardCategory].length) {
+                    if (matched === sources.length) {
                         document.getElementById('board').className = 'win';
                         document.getElementById('message').textContent = 'All matched!';
                     }
                 } else {
                     // Disable flips for 1 second until cards flipped back.
-                    document.getElementById('board').removeEventListener('click', flipCard, false);
+                    document.getElementById('board').removeEventListener('click', this.flipCard, false);
+
                     // Turn both cards back after a 1 sec delay.
                     setTimeout(function() {
-                        flipBack(flipped);
+                        card.flipBack(flipped);
                         flipped = null;
-                        flipBack(event.target.id);
-                        document.getElementById('board').addEventListener('click', flipCard, false);
+                        card.flipBack(event.target.id);
+                        document.getElementById('board').addEventListener('click', card.flipCard, false);
                     }, 1000);
                 }
             }
         }
     }
-}
-
-function flipBack(elementId) {
-    document.getElementById(elementId).alt = 'back';
-    document.getElementById(elementId).src = 'img/circuit4.svg';
-}
-
-function vanish(elementId) {
-    document.getElementById(elementId).className = 'matched';
-}
-
-// Register event handler.
-document.getElementById('board').addEventListener('click', flipCard, false);
-
-
-
-var handleDragStart = function(event) {
-    cardCategory = event.target.id; // Grab character ID from event.target
-    // document.body.className = event.target.id; // Set body class to class w/ same name as ID
 };
 
-var handleDragDrop = function(event) {
+
+
+document.getElementById('board').addEventListener('click', card.flipCard, false);
+
+Card.prototype.handleDragStart = function(event) {
+    this.createSources(event.target.id);
+};
+
+Card.prototype.handleDragDrop = function(event) {
     if (event.preventDefault) event.preventDefault();
 };
 
 // Neccessary to make drop work, weird but necessary.
-var handleDragOver = function(event) {
+Card.prototype.handleDragOver = function(event) {
     if (event.preventDefault) event.preventDefault();
     return false;
 };
 
-/* Using characters element allows for event delegation and one event listeners
-instead of 5. Characters declared at top of app.js with all global variables.
-Event listener needs to be on dragstart for drag and drop to work. */
+/* Using cardCategories element allows for event delegation and one event listeners
+instead of the card choice number. Event listener needs to be on dragstart for drag and drop to work. */
 document.getElementById('cardCategories').addEventListener('dragstart', function(event) {
-    handleDragStart(event);
+    card.handleDragStart(event);
 }, false);
 
 
-document.getElementById('board').addEventListener('dragover', handleDragOver, false);
-document.getElementById('board').addEventListener('drop', handleDragDrop, false);
+document.getElementById('board').addEventListener('dragover', card.handleDragOver, false);
+document.getElementById('board').addEventListener('drop', card.handleDragDrop, false);
 
 
 
