@@ -143,6 +143,8 @@ document.getElementById('cardCategories').addEventListener('dragstart', function
 document.getElementById('board').addEventListener('dragover', card.handleDragOver, false);
 document.getElementById('board').addEventListener('drop', card.handleDragDrop, false);
 
+/* test code to see babel output */
+
 var Car = function Car(engine) {
     _classCallCheck(this, Car);
 
