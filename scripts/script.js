@@ -100,7 +100,7 @@ Card.prototype.flipCard = function(event) {
                     }
                 } else {
                     // Disable flips for 1 second until cards flipped back.
-                    document.getElementById('board').removeEventListener('click', this.flipCard, false);
+                    document.getElementById('board').removeEventListener('click', card.flipCard, false);
 
                     // Turn both cards back after a 1 sec delay.
                     setTimeout(function() {
@@ -143,5 +143,11 @@ document.getElementById('cardCategories').addEventListener('dragstart', function
 document.getElementById('board').addEventListener('dragover', card.handleDragOver, false);
 document.getElementById('board').addEventListener('drop', card.handleDragDrop, false);
 
+/* test code to see babel output */
+class Car {
 
+    constructor(engine) {
+        this.engine = engine;
+    }
 
+}

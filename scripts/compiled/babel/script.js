@@ -5,6 +5,8 @@
 
 // Sources array contains img'file names with corresponding alt attribute.
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
 var sources = [],
     deck = [],
     image = {},
@@ -140,3 +142,9 @@ document.getElementById('cardCategories').addEventListener('dragstart', function
 
 document.getElementById('board').addEventListener('dragover', card.handleDragOver, false);
 document.getElementById('board').addEventListener('drop', card.handleDragDrop, false);
+
+var Car = function Car(engine) {
+    _classCallCheck(this, Car);
+
+    this.engine = engine;
+};
