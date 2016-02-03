@@ -18,7 +18,7 @@ var options = {
 
 /* babel test */
 gulp.task('traceur', function() {
-    gulp.src([es6Path])
+    return gulp.src([es6Path])
         .pipe(plumber())
         .pipe(traceur({
             blockBinding: true
@@ -27,7 +27,7 @@ gulp.task('traceur', function() {
 });
 
 gulp.task('babel', function() {
-    gulp.src([es6Path])
+    return gulp.src([es6Path])
         .pipe(plumber())
         .pipe(babel())
         .pipe(gulp.dest(compilePath + '/babel'));
@@ -65,7 +65,9 @@ gulp.task("build", ['renameImages'], function() {
             "memory.appcache",
             "styles/*",
             "img/*/*",
-            "scripts/*"
+            "scripts/*/*/*",
+            "scripts/*",
+            "img/*.svg"
         ], {
             base: "./"
         })
