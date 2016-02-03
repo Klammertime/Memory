@@ -3,32 +3,37 @@
  */
 "use strict";
 
-// Sources array contains images'file names with corresponding alt attribute.
-var sources = [{
-    file: 'img/robot29.svg',
-    alt: 'robot29'
-}, {
-    file: 'img/robot30.svg',
-    alt: 'robot30'
-}, {
-    file: 'img/robot26.svg',
-    alt: 'robot26'
-}, {
-    file: 'img/robot25.svg',
-    alt: 'robot25'
-}, {
-    file: 'img/robot22.svg',
-    alt: 'robot22'
-}, {
-    file: 'img/robot17.svg',
-    alt: 'robot17'
-}, {
-    file: 'img/robot21.svg',
-    alt: 'robot21'
-}, {
-    file: 'img/rounded46.svg',
-    alt: 'rounded46'
-}, ];
+// Sources array contains img'file names with corresponding alt attribute.
+
+var sources = [],
+    deck = [],
+    image = {},
+    Card,
+    card,
+    flipped,
+    matched;
+
+Card = function(category, file, alt) {
+    this.category = category;
+    this.file = file;
+    this.alt = alt;
+};
+
+card = new Card('feather', 'img/feather/feather2.svg', 'feather2');
+
+Card.prototype.createSources = function(category) {
+    var imgLocation,
+        imgAlt;
+    sources = [];
+    for (var i = 1; i < 9; i++) {
+        imgLocation = 'img/' + category + '/' + category + i + '.svg';
+        imgAlt = category + i;
+        sources.push(new Card(category, imgLocation, imgAlt));
+    }
+};
+
+card.createSources('feather');
+
 // Shuffle method called on any array to shuffle it in place.
 Array.prototype.shuffle = function() {
     var i = this.length;
@@ -37,17 +42,16 @@ Array.prototype.shuffle = function() {
     while (--i) {
         j = Math.floor(Math.random() * (i + 1));
         [this[i], this[j]] = [this[j], this[i]];
-
     }
     return this;
 };
 
 // Array deck represents cards.
-var deck = [];
+deck = [];
 // Image object maps cards to an image in the sources array.
-var image = {};
+image = {};
 
-function initGame() {
+Card.prototype.initGame = function() {
     // In deck: each image represented twice;
     // contains index of cooresponding image in sources array.
     for (var i = 0; i < sources.length; i++) {
@@ -60,12 +64,21 @@ function initGame() {
     for (var j = 0; j < 2 * sources.length; j++) {
         image['card_' + j] = deck[j];
     }
-}
-var flipped = null; // Last card flipped if still open.
-var matched = 0; // Number of pairs matched.
-initGame();
+};
+flipped = null; // Last card flipped if still open.
+matched = 0; // Number of pairs matched.
+card.initGame();
 
-function flipCard(event) {
+Card.prototype.flipBack = function(elementId) {
+    document.getElementById(elementId).alt = 'back';
+    document.getElementById(elementId).src = 'img/circuit4.svg';
+};
+
+Card.prototype.vanish = function(elementId) {
+    document.getElementById(elementId).className = 'matched';
+};
+
+Card.prototype.flipCard = function(event) {
     if (event.target.className === 'card') {
         if (event.target.alt === 'back') {
             var imageIndex = image[event.target.id];
@@ -76,8 +89,8 @@ function flipCard(event) {
             } else {
                 if (image[flipped] === image[event.target.id]) {
                     // Match found.
-                    vanish(flipped);
-                    vanish(event.target.id);
+                    card.vanish(flipped);
+                    card.vanish(event.target.id);
                     flipped = null;
                     matched++;
                     // If all cards have been matched, user wins.
@@ -87,27 +100,54 @@ function flipCard(event) {
                     }
                 } else {
                     // Disable flips for 1 second until cards flipped back.
-                    document.getElementById('board').removeEventListener('click', flipCard, false);
+                    document.getElementById('board').removeEventListener('click', card.flipCard, false);
+
                     // Turn both cards back after a 1 sec delay.
                     setTimeout(function() {
-                        flipBack(flipped);
+                        card.flipBack(flipped);
                         flipped = null;
-                        flipBack(event.target.id);
-                        document.getElementById('board').addEventListener('click', flipCard, false);
+                        card.flipBack(event.target.id);
+                        document.getElementById('board').addEventListener('click', card.flipCard, false);
                     }, 1000);
                 }
             }
         }
     }
-}
+};
 
-function flipBack(elementId) {
-    document.getElementById(elementId).alt = 'back';
-    document.getElementById(elementId).src = 'img/circuit4.svg';
-}
 
-function vanish(elementId) {
-    document.getElementById(elementId).className = 'matched';
+
+document.getElementById('board').addEventListener('click', card.flipCard, false);
+
+Card.prototype.handleDragStart = function(event) {
+    this.createSources(event.target.id);
+};
+
+Card.prototype.handleDragDrop = function(event) {
+    if (event.preventDefault) event.preventDefault();
+};
+
+// Neccessary to make drop work, weird but necessary.
+Card.prototype.handleDragOver = function(event) {
+    if (event.preventDefault) event.preventDefault();
+    return false;
+};
+
+/* Using cardCategories element allows for event delegation and one event listeners
+instead of the card choice number. Event listener needs to be on dragstart for drag and drop to work. */
+document.getElementById('cardCategories').addEventListener('dragstart', function(event) {
+    card.handleDragStart(event);
+}, false);
+
+
+document.getElementById('board').addEventListener('dragover', card.handleDragOver, false);
+document.getElementById('board').addEventListener('drop', card.handleDragDrop, false);
+
+/* test code to see babel output */
+class Car {
+
+    constructor(engine) {
+        this.engine = engine;
+    }
+
 }
-// Register event handler.
-document.getElementById('board').addEventListener('click', flipCard, false);

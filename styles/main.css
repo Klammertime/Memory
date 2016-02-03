@@ -1,3 +1,4 @@
+@import url(https://fonts.googleapis.com/css?family=Lato:300);
 body {
     font: 300 16px/22px 'Lato', 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     text-align: center;
@@ -51,4 +52,13 @@ h1 {
     opacity: 0;
     border: 1px solid rgb(100, 136, 128);
     background: #f6f1d3;
+}
+
+.cardList {
+    padding: 0 300px;
+}
+
+.categories {
+    margin-top: 50px;
+    margin-bottom: 20px;
 }
