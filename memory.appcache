@@ -74,16 +74,6 @@ CACHE:
 ./img/gaming/gaming7.svg
 ./img/gaming/gaming8.svg
 ./img/gaming/gaming9.svg
-./img/marijuana/marijuana1.svg
-./img/marijuana/marijuana10.svg
-./img/marijuana/marijuana2.svg
-./img/marijuana/marijuana3.svg
-./img/marijuana/marijuana4.svg
-./img/marijuana/marijuana5.svg
-./img/marijuana/marijuana6.svg
-./img/marijuana/marijuana7.svg
-./img/marijuana/marijuana8.svg
-./img/marijuana/marijuana9.svg
 ./img/germany/germany1.svg
 ./img/germany/germany10.svg
 ./img/germany/germany2.svg
@@ -104,6 +94,16 @@ CACHE:
 ./img/hair/hair7.svg
 ./img/hair/hair8.svg
 ./img/hair/hair9.svg
+./img/marijuana/marijuana1.svg
+./img/marijuana/marijuana10.svg
+./img/marijuana/marijuana2.svg
+./img/marijuana/marijuana3.svg
+./img/marijuana/marijuana4.svg
+./img/marijuana/marijuana5.svg
+./img/marijuana/marijuana6.svg
+./img/marijuana/marijuana7.svg
+./img/marijuana/marijuana8.svg
+./img/marijuana/marijuana9.svg
 ./img/masks/masks1.svg
 ./img/masks/masks10.svg
 ./img/masks/masks2.svg
@@ -134,16 +134,6 @@ CACHE:
 ./img/movies/movies7.svg
 ./img/movies/movies8.svg
 ./img/movies/movies9.svg
-./img/robots/robots1.svg
-./img/robots/robots10.svg
-./img/robots/robots2.svg
-./img/robots/robots3.svg
-./img/robots/robots4.svg
-./img/robots/robots5.svg
-./img/robots/robots6.svg
-./img/robots/robots7.svg
-./img/robots/robots8.svg
-./img/robots/robots9.svg
 ./img/polygonal/polygonal1.svg
 ./img/polygonal/polygonal10.svg
 ./img/polygonal/polygonal2.svg
@@ -154,6 +144,26 @@ CACHE:
 ./img/polygonal/polygonal7.svg
 ./img/polygonal/polygonal8.svg
 ./img/polygonal/polygonal9.svg
+./img/robots/robots1.svg
+./img/robots/robots10.svg
+./img/robots/robots2.svg
+./img/robots/robots3.svg
+./img/robots/robots4.svg
+./img/robots/robots5.svg
+./img/robots/robots6.svg
+./img/robots/robots7.svg
+./img/robots/robots8.svg
+./img/robots/robots9.svg
+./img/secretService/secretService1.svg
+./img/secretService/secretService10.svg
+./img/secretService/secretService2.svg
+./img/secretService/secretService3.svg
+./img/secretService/secretService4.svg
+./img/secretService/secretService5.svg
+./img/secretService/secretService6.svg
+./img/secretService/secretService7.svg
+./img/secretService/secretService8.svg
+./img/secretService/secretService9.svg
 ./img/workers/workers1.svg
 ./img/workers/workers10.svg
 ./img/workers/workers2.svg
@@ -184,25 +194,16 @@ CACHE:
 ./img/zombies/zombies7.svg
 ./img/zombies/zombies8.svg
 ./img/zombies/zombies9.svg
-./img/secretService/secretService1.svg
-./img/secretService/secretService10.svg
-./img/secretService/secretService2.svg
-./img/secretService/secretService3.svg
-./img/secretService/secretService4.svg
-./img/secretService/secretService5.svg
-./img/secretService/secretService6.svg
-./img/secretService/secretService7.svg
-./img/secretService/secretService8.svg
-./img/secretService/secretService9.svg
 
 
 NETWORK:
 http://*
 https://*
 *
+http://*.*.*/*/*
 
 
 SETTINGS:
 prefer-online
 
-# hash: b2ea8e5dcfa28a3d87791cc2bfbe6dfbd43c6fac7aaaa185d9f7fd6bcd43bc91
+# hash: 5236f8547504a79e44dd6e60194c7d2a8947e9b67956f8553733b863725bc36a
