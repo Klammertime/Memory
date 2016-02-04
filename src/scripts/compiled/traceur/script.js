@@ -11,7 +11,7 @@ Card = function(category, file, alt) {
   this.file = file;
   this.alt = alt;
 };
-card = new Card('feather', 'img/feather/feather2.svg', 'feather2');
+card = new Card('robots', 'img/robots/robots2.svg', 'robot2');
 Card.prototype.createSources = function(category) {
   var imgLocation,
       imgAlt;
@@ -22,7 +22,7 @@ Card.prototype.createSources = function(category) {
     sources.push(new Card(category, imgLocation, imgAlt));
   }
 };
-card.createSources('feather');
+card.createSources('robots');
 Array.prototype.shuffle = function() {
   var $__1,
       $__2,

@@ -19,7 +19,7 @@ Card = function(category, file, alt) {
     this.alt = alt;
 };
 
-card = new Card('feather', 'img/feather/feather2.svg', 'feather2');
+card = new Card('robots', 'img/robots/robots2.svg', 'robot2');
 
 Card.prototype.createSources = function(category) {
     var imgLocation,
@@ -32,7 +32,7 @@ Card.prototype.createSources = function(category) {
     }
 };
 
-card.createSources('feather');
+card.createSources('robots');
 
 // Shuffle method called on any array to shuffle it in place.
 Array.prototype.shuffle = function() {
