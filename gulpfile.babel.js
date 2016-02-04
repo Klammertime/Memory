@@ -79,11 +79,10 @@ gulp.task('html', ['babel'], function() {
         .pipe(gulp.dest(options.dist));
 });
 
-
 gulp.task('manifest', ['html', 'svg'], function(){
   return gulp.src([options.dist + '/**/*'])
     .pipe(manifest({
-  relativePath: options.dist,
+  relativePath: './',
       hash: true,
       preferOnline: true,
       network: ['http://*', 'https://*', '*'],
