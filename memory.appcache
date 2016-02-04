@@ -35,6 +35,15 @@ CACHE:
 ./img/crazyShoes/crazyShoes7.svg
 ./img/crazyShoes/crazyShoes8.svg
 ./img/crazyShoes/crazyShoes9.svg
+./img/fingerprints/fingerprints1.svg
+./img/fingerprints/fingerprints2.svg
+./img/fingerprints/fingerprints3.svg
+./img/fingerprints/fingerprints4.svg
+./img/fingerprints/fingerprints5.svg
+./img/fingerprints/fingerprints6.svg
+./img/fingerprints/fingerprints7.svg
+./img/fingerprints/fingerprints8.svg
+./img/fingerprints/fingerprints9.svg
 ./img/electronicons/electronicons1.svg
 ./img/electronicons/electronicons10.svg
 ./img/electronicons/electronicons2.svg
@@ -55,15 +64,6 @@ CACHE:
 ./img/feather/feather7.svg
 ./img/feather/feather8.svg
 ./img/feather/feather9.svg
-./img/fingerprints/fingerprints1.svg
-./img/fingerprints/fingerprints2.svg
-./img/fingerprints/fingerprints3.svg
-./img/fingerprints/fingerprints4.svg
-./img/fingerprints/fingerprints5.svg
-./img/fingerprints/fingerprints6.svg
-./img/fingerprints/fingerprints7.svg
-./img/fingerprints/fingerprints8.svg
-./img/fingerprints/fingerprints9.svg
 ./img/gaming/gaming1.svg
 ./img/gaming/gaming10.svg
 ./img/gaming/gaming2.svg
@@ -114,16 +114,6 @@ CACHE:
 ./img/masks/masks7.svg
 ./img/masks/masks8.svg
 ./img/masks/masks9.svg
-./img/moustaches/moustaches1.svg
-./img/moustaches/moustaches10.svg
-./img/moustaches/moustaches2.svg
-./img/moustaches/moustaches3.svg
-./img/moustaches/moustaches4.svg
-./img/moustaches/moustaches5.svg
-./img/moustaches/moustaches6.svg
-./img/moustaches/moustaches7.svg
-./img/moustaches/moustaches8.svg
-./img/moustaches/moustaches9.svg
 ./img/movies/movies1.svg
 ./img/movies/movies10.svg
 ./img/movies/movies2.svg
@@ -154,6 +144,16 @@ CACHE:
 ./img/robots/robots7.svg
 ./img/robots/robots8.svg
 ./img/robots/robots9.svg
+./img/moustaches/moustaches1.svg
+./img/moustaches/moustaches10.svg
+./img/moustaches/moustaches2.svg
+./img/moustaches/moustaches3.svg
+./img/moustaches/moustaches4.svg
+./img/moustaches/moustaches5.svg
+./img/moustaches/moustaches6.svg
+./img/moustaches/moustaches7.svg
+./img/moustaches/moustaches8.svg
+./img/moustaches/moustaches9.svg
 ./img/secretService/secretService1.svg
 ./img/secretService/secretService10.svg
 ./img/secretService/secretService2.svg
@@ -201,9 +201,10 @@ http://*
 https://*
 *
 http://*.*.*/*/*
+https://*.*/*/*/*
 
 
 SETTINGS:
 prefer-online
 
-# hash: 5236f8547504a79e44dd6e60194c7d2a8947e9b67956f8553733b863725bc36a
+# hash: 8169f358b4b5aabfb8d0362cf31ac7ec94d861ad6e0a04c91efc4c668908ec76
