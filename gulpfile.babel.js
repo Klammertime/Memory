@@ -97,7 +97,7 @@ gulp.task('manifest', ['html', 'svg'], function(){
 gulp.task('build', ['manifest'], function() {
     return gulp.src([
             'index.html',
-            'img/*'
+            options.src + 'img/circuit4.svg'
         ], {
             base: options.src
         })
