@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html manifest="memory.appcache">
+
 
 <head>
     <meta charset="utf-8">
     <title>Memory Game</title>
 
-    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/app.min.css">
 
     <meta name="viewport" content="width=device-width">
 </head>
@@ -13,44 +14,43 @@
 <body>
     <h1 id="message">Flip & Match</h1>
     <div id="board" class="play">
-        <img id="card_0" src="img/circuit4.svg" alt="back" class="card">
-        <img id="card_1" src="img/circuit4.svg" alt="back" class="card">
-        <img id="card_2" src="img/circuit4.svg" alt="back" class="card">
-        <img id="card_3" src="img/circuit4.svg" alt="back" class="card">
-        <img id="card_4" src="img/circuit4.svg" alt="back" class="card">
-        <img id="card_5" src="img/circuit4.svg" alt="back" class="card">
-        <img id="card_6" src="img/circuit4.svg" alt="back" class="card">
-        <img id="card_7" src="img/circuit4.svg" alt="back" class="card">
-        <img id="card_8" src="img/circuit4.svg" alt="back" class="card">
-        <img id="card_9" src="img/circuit4.svg" alt="back" class="card">
-        <img id="card_10" src="img/circuit4.svg" alt="back" class="card">
-        <img id="card_11" src="img/circuit4.svg" alt="back" class="card">
-        <img id="card_12" src="img/circuit4.svg" alt="back" class="card">
-        <img id="card_13" src="img/circuit4.svg" alt="back" class="card">
-        <img id="card_14" src="img/circuit4.svg" alt="back" class="card">
-        <img id="card_15" src="img/circuit4.svg" alt="back" class="card">
+        <img id="card_0" src="img/electronicons/electronicons1.svg" alt="back" class="card">
+        <img id="card_1" src="img/electronicons/electronicons1.svg" alt="back" class="card">
+        <img id="card_2" src="img/electronicons/electronicons1.svg" alt="back" class="card">
+        <img id="card_3" src="img/electronicons/electronicons1.svg" alt="back" class="card">
+        <img id="card_4" src="img/electronicons/electronicons1.svg" alt="back" class="card">
+        <img id="card_5" src="img/electronicons/electronicons1.svg" alt="back" class="card">
+        <img id="card_6" src="img/electronicons/electronicons1.svg" alt="back" class="card">
+        <img id="card_7" src="img/electronicons/electronicons1.svg" alt="back" class="card">
+        <img id="card_8" src="img/electronicons/electronicons1.svg" alt="back" class="card">
+        <img id="card_9" src="img/electronicons/electronicons1.svg" alt="back" class="card">
+        <img id="card_10" src="img/electronicons/electronicons1.svg" alt="back" class="card">
+        <img id="card_11" src="img/electronicons/electronicons1.svg" alt="back" class="card">
+        <img id="card_12" src="img/electronicons/electronicons1.svg" alt="back" class="card">
+        <img id="card_13" src="img/electronicons/electronicons1.svg" alt="back" class="card">
+        <img id="card_14" src="img/electronicons/electronicons1.svg" alt="back" class="card">
+        <img id="card_15" src="img/electronicons/electronicons1.svg" alt="back" class="card">
     </div>
     <h2 class="categories">Drag & drop a category below onto the board:</h2>
     <div id="cardCategories" class="cardList">
-        <img id="cars" src="img/cars/cars1.svg" class="card">
-        <img id="feather" src="img/feather/feather1.svg" class="card">
-        <img id="germany" src="img/germany/germany1.svg" class="card">
-        <img id="marijuana" src="img/marijuana/marijuana1.svg" class="card">
-        <img id="masks" src="img/masks/masks1.svg" class="card">
-        <img id="movies" src="img/movies/movies1.svg" class="card">
-        <img id="robots" src="img/robots/robots1.svg" class="card">
-        <img id="zombies" src="img/zombies/zombies1.svg" class="card">
-        <img id="gaming" src="img/gaming/gaming1.svg" class="card">
-        <img id="fingerprints" src="img/fingerprints/fingerprints1.svg" class="card">
-        <img id="animals" src="img/animals/animals1.svg" class="card">
-        <img id="electronicons" src="img/electronicons/electronicons1.svg" class="card">
-        <img id="crazyShoes" src="img/crazyShoes/crazyShoes1.svg" class="card">
-        <img id="hair" src="img/hair/hair1.svg" class="card">
-        <img id="moustaches" src="img/moustaches/moustaches1.svg" class="card">
-        <img id="polygonal" src="img/polygonal/polygonal1.svg" class="card">
-        <img id="secretService" src="img/secretService/secretService1.svg" class="card">
-        <img id="workers" src="img/workers/workers1.svg" class="card">
-        <img id="yogaPilates" src="img/yogaPilates/yogaPilates1.svg" class="card">
+        <img id="cars" src="img/cars/cars1.svg" class="cardCategory">
+        <img id="feather" src="img/feather/feather1.svg" class="cardCategory">
+        <img id="germany" src="img/germany/germany1.svg" class="cardCategory">
+        <img id="marijuana" src="img/marijuana/marijuana1.svg" class="cardCategory">
+        <img id="masks" src="img/masks/masks1.svg" class="cardCategory">
+        <img id="movies" src="img/movies/movies1.svg" class="cardCategory">
+        <img id="robots" src="img/robots/robots1.svg" class="cardCategory">
+        <img id="zombies" src="img/zombies/zombies1.svg" class="cardCategory">
+        <img id="gaming" src="img/gaming/gaming1.svg" class="cardCategory">
+        <img id="fingerprints" src="img/fingerprints/fingerprints1.svg" class="cardCategory">
+        <img id="animals" src="img/animals/animals1.svg" class="cardCategory">
+        <img id="crazyShoes" src="img/crazyShoes/crazyShoes1.svg" class="cardCategory">
+        <img id="hair" src="img/hair/hair1.svg" class="cardCategory">
+        <img id="moustaches" src="img/moustaches/moustaches1.svg" class="cardCategory">
+        <img id="polygonal" src="img/polygonal/polygonal1.svg" class="cardCategory">
+        <img id="secretService" src="img/secretService/secretService1.svg" class="cardCategory">
+        <img id="workers" src="img/workers/workers1.svg" class="cardCategory">
+        <img id="yogaPilates" src="img/yogaPilates/yogaPilates1.svg" class="cardCategory">
     </div>
     <script src="scripts/app.js"></script>
 </body>

@@ -10,8 +10,10 @@
      plumber = require('gulp-plumber'),
       useref = require('gulp-useref'),
       uglify = require('gulp-uglify'),
-         iff = require('gulp-if'),
-        csso = require('gulp-csso'),
+      gulpif = require('gulp-if'),
+   minifyCss = require('gulp-minify-css'),
+      svgmin = require('gulp-svgmin'),
+    manifest = require('gulp-appcache'),
      es6Path = 'src/scripts/script.js',
  compilePath = 'src/scripts/compiled';
 
@@ -19,8 +21,6 @@ var options = {
     dist: 'dist',
     src: 'src'
 };
-
-
 
 var index = 1;
 
@@ -34,6 +34,14 @@ gulp.task('renameImages', function() {
         }))
         .pipe(gulp.dest(options.src + '/img'));
 });
+
+// SVG optimization task
+gulp.task('svg', ['renameImages'], function () {
+  return gulp.src(options.src + '/img/*/*')
+    .pipe(svgmin())
+    .pipe(gulp.dest(options.dist + '/img'));
+});
+
 
 gulp.task('watchFiles', function() {
     gulp.watch([es6Path], ['traceur', 'babel']);
@@ -62,22 +70,34 @@ gulp.task('clean', function() {
 
 // Takes html file and runs through useref, tells html
 // what script and style files have based on index.html
-gulp.task('html', function() {
+gulp.task('html', ['babel'], function() {
     gulp.src(options.src + '/index.html')
-        // if files end in .js, apply uglify method
-        .pipe(iff('*.js', uglify()))
-        // if files end in .css, applu csso
-        .pipe(iff('*.css', csso()))
         .pipe(useref())
+        // if files end in .js, apply uglify method
+        .pipe(gulpif('*.js', uglify()))
+        .pipe(gulpif('*.css', minifyCss()))
         .pipe(gulp.dest(options.dist));
 });
 
-gulp.task('build', ['renameImages', 'html'], function() {
+
+gulp.task('manifest', ['html', 'svg'], function(){
+  return gulp.src([options.dist + '/**/*'])
+    .pipe(manifest({
+  relativePath: options.dist,
+      hash: true,
+      preferOnline: true,
+      network: ['http://*', 'https://*', '*'],
+      filename: 'memory.appcache',
+      exclude: 'memory.appcache'
+     }))
+    .pipe(gulp.dest(options.dist));
+});
+
+
+gulp.task('build', ['manifest'], function() {
     return gulp.src([
             'index.html',
-            options.src + '/memory.appcache',
-            options.src + '/img/*/*',
-            options.src + '/img/*.svg'
+            'img/*'
         ], {
             base: options.src
         })
@@ -85,13 +105,13 @@ gulp.task('build', ['renameImages', 'html'], function() {
 });
 
 gulp.task('deploy', function() {
-    return gulp.src(options.dist + '**/*')
+    return gulp.src(options.dist + '/**/*')
         .pipe(pages());
 });
 
 gulp.task('serve', ['watchFiles']);
 
 // Build task is a dependency of default task so can run command "gulp".
-gulp.task('default', ['clean', 'traceur', 'babel'], function() {
+gulp.task('default', ['clean', 'traceur'], function() {
     gulp.start('build');
 });

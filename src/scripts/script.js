@@ -71,7 +71,7 @@ card.initGame();
 
 Card.prototype.flipBack = function(elementId) {
     document.getElementById(elementId).alt = 'back';
-    document.getElementById(elementId).src = 'img/circuit4.svg';
+    document.getElementById(elementId).src = 'img/electronicons/electronicons1.svg';
 };
 
 Card.prototype.vanish = function(elementId) {
@@ -116,11 +116,26 @@ Card.prototype.flipCard = function(event) {
 };
 
 
+Card.prototype.changeCardBack = function(category){
+    // grab all img els in #board
+    var imgBackLocation = 'img/' + category + '/' + category + '1.svg';
+
+    var imgList = document.querySelectorAll('img.card');
+    // make it into an array
+    var imgListArray = Array.prototype.slice.call(imgList);
+    console.log(imgListArray);
+    // forEach it and replace .src with the below
+    imgListArray.forEach(function(val, ind, arr){
+        val.src = imgBackLocation;
+    })
+};
+
 
 document.getElementById('board').addEventListener('click', card.flipCard, false);
 
 Card.prototype.handleDragStart = function(event) {
     this.createSources(event.target.id);
+    // this.changeCardBack(event.target.id);
 };
 
 Card.prototype.handleDragDrop = function(event) {

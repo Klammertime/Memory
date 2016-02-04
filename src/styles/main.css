@@ -13,7 +13,8 @@ h1 {
     text-transform: uppercase;
 }
 
-.card {
+.card,
+.cardCategory {
     display: inline-block;
     width: 75px;
     height: 75px;
