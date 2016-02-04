@@ -1,10 +1,19 @@
 CACHE MANIFEST
+# version 1.7
+
+CACHE:
+../scripts/draw.js
+../css/main.css
+
+NETWORK:
+
+FALLBACK:
 
 
 CACHE:
-./index.html
-./css/app.min.css
-./scripts/app.js
+index.html
+css/app.min.css
+scripts/app.js
 ./img/animals/animals1.svg
 ./img/animals/animals10.svg
 ./img/animals/animals2.svg
@@ -194,14 +203,6 @@ CACHE:
 ./img/zombies/zombies7.svg
 ./img/zombies/zombies8.svg
 ./img/zombies/zombies9.svg
-
-
-NETWORK:
-http://*
-https://*
-*
-http://*.*.*/*/*
-https://*.*/*/*/*
 
 
 SETTINGS:
