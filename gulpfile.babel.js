@@ -12,7 +12,7 @@
       gulpif = require('gulp-if'),
    minifyCss = require('gulp-minify-css'),
       svgmin = require('gulp-svgmin'),
-    manifest = require('gulp-appcache'),
+    // manifest = require('gulp-appcache'),
         bust = require('gulp-buster'),
       jshint = require('gulp-jshint'),
       flexSvg = require('gulp-flex-svg'),
@@ -102,8 +102,8 @@ gulp.task('build', ['svg', 'html', 'watchFiles'], function() {
 });
 
 gulp.task('deploy', function() {
-    return gulp.src(options.dist + '/**/*')
-        .pipe(pages());
+    return gulp.src(options.dist + '/*')
+    .pipe(pages());
 });
 
 gulp.task('serve', ['watchFiles']);
