@@ -16,7 +16,6 @@
         bust = require('gulp-buster'),
       jshint = require('gulp-jshint'),
       flexSvg = require('gulp-flex-svg'),
-
       cache  = require('gulp-memory-cache'),
       gulpcached = require('gulp-cached'),
      es6Path = 'src/scripts/script.js',
@@ -79,27 +78,27 @@ gulp.task('watchFiles', function() {
         .on('change', cache.update('js'));
 });
 
-gulp.task('manifest', ['svg', 'html'], function(){
-  return gulp.src([options.dist + '/**/*'])
-    .pipe(manifest({
-  relativePath: './',
-      hash: true,
-      preferOnline: true,
-      // network: ['http://*', 'https://*', '*', 'http://*.*.*/*/*', 'https://*.*/*/*/*'],
-      filename: 'memory.appcache',
-      exclude: 'memory.appcache'
-     }))
-    .pipe(gulp.dest(options.dist));
-});
+// gulp.task('manifest', ['svg', 'html'], function(){
+//   return gulp.src([options.dist + '/**/*'])
+//     .pipe(manifest({
+//   relativePath: './',
+//       hash: true,
+//       preferOnline: true,
+//       network: ['http://*', 'https://*', '*', 'http://*.*.*/*/*', 'https://*.*/*/*/*'],
+//       filename: 'memory.appcache',
+//       exclude: 'memory.appcache'
+//      }))
+//     .pipe(gulp.dest(options.dist));
+// });
 
 
-gulp.task('build', ['manifest', 'watchFiles'], function() {
+gulp.task('build', ['svg', 'html', 'watchFiles'], function() {
     return gulp.src([
+      'memory.appcache'
         ], {
             base: options.src
         })
         .pipe(bust())
-
         .pipe(gulp.dest(options.dist));
 });
 
