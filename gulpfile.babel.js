@@ -5,7 +5,6 @@
       rename = require('gulp-rename'),
           fs = require('fs'),
         path = require('path'),
-     traceur = require('gulp-traceur'),
        babel = require('gulp-babel'),
      plumber = require('gulp-plumber'),
       useref = require('gulp-useref'),
@@ -50,16 +49,6 @@ gulp.task('svg', ['renameImages'], function () {
     .pipe(gulp.dest(options.dist + '/img'));
 });
 
-
-gulp.task('traceur', function() {
-    return gulp.src([es6Path])
-        .pipe(plumber())
-        .pipe(traceur({
-            blockBinding: true
-        }))
-        .pipe(gulp.dest(compilePath + '/traceur'));
-});
-
 gulp.task('babel', function() {
     return gulp.src([es6Path])
         .pipe(plumber())
@@ -77,39 +66,13 @@ gulp.task('clean', function() {
 gulp.task('html', ['babel'], function() {
     return gulp.src(options.src + '/index.html', {since: cache.lastMtime('js')})
         .pipe(useref())
-        // if files end in .js, apply uglify method
-        //
-    // .pipe(gulpif('*.js', jshint()))
-    .pipe(gulpif('*.js', gulpcached('linting')))
-    .pipe(gulpif('*.js', jshint()))
-    .pipe(gulpif('*.js', jshint.reporter()))
-
-
-
-
-        // .pipe(gulpif('*.js', cache('js')))
-
+        .pipe(gulpif('*.js', gulpcached('linting')))
+        .pipe(gulpif('*.js', jshint()))
+        .pipe(gulpif('*.js', jshint.reporter()))
         .pipe(gulpif('*.js', uglify()))
-
         .pipe(gulpif('*.css', minifyCss()))
         .pipe(gulp.dest(options.dist));
 });
-
-
-// gulp.task('buildJs', function () {
-//     return gulp.src('src/**/*.js', {since: cache.lastMtime('js')})
-//         .pipe(jshint())
-//         .pipe(cache('js'))
-//         .pipe(concat('app.js'))
-//         .pipe(dest('build'));
-// });
-
-// gulp.task('watch', function () {
-//     gulp.watch('src/**/*.js', gulp.series('buildJs'))
-//         .on('change', cache.update('js'));
-// });
-
-// gulp.task('build', gulp.series('buildJs', 'watch'));
 
 gulp.task('watchFiles', function() {
     return gulp.watch(es6Path)
@@ -132,7 +95,6 @@ gulp.task('manifest', ['svg', 'html'], function(){
 
 gulp.task('build', ['manifest', 'watchFiles'], function() {
     return gulp.src([
-            // 'index.html'
         ], {
             base: options.src
         })
