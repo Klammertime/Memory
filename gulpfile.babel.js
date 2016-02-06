@@ -14,6 +14,12 @@
    minifyCss = require('gulp-minify-css'),
       svgmin = require('gulp-svgmin'),
     manifest = require('gulp-appcache'),
+        bust = require('gulp-buster'),
+      jshint = require('gulp-jshint'),
+      flexSvg = require('gulp-flex-svg'),
+
+      cache  = require('gulp-memory-cache'),
+      gulpcached = require('gulp-cached'),
      es6Path = 'src/scripts/script.js',
  compilePath = 'src/scripts/compiled';
 
@@ -39,13 +45,11 @@ gulp.task('renameImages', function() {
 gulp.task('svg', ['renameImages'], function () {
   return gulp.src(options.src + '/img/*/*')
     .pipe(svgmin())
+    .pipe(flexSvg())
+
     .pipe(gulp.dest(options.dist + '/img'));
 });
 
-
-gulp.task('watchFiles', function() {
-    gulp.watch([es6Path], ['traceur', 'babel']);
-});
 
 gulp.task('traceur', function() {
     return gulp.src([es6Path])
@@ -71,21 +75,54 @@ gulp.task('clean', function() {
 // Takes html file and runs through useref, tells html
 // what script and style files have based on index.html
 gulp.task('html', ['babel'], function() {
-    gulp.src(options.src + '/index.html')
+    return gulp.src(options.src + '/index.html', {since: cache.lastMtime('js')})
         .pipe(useref())
         // if files end in .js, apply uglify method
+        //
+    // .pipe(gulpif('*.js', jshint()))
+    .pipe(gulpif('*.js', gulpcached('linting')))
+    .pipe(gulpif('*.js', jshint()))
+    .pipe(gulpif('*.js', jshint.reporter()))
+
+
+
+
+        // .pipe(gulpif('*.js', cache('js')))
+
         .pipe(gulpif('*.js', uglify()))
+
         .pipe(gulpif('*.css', minifyCss()))
         .pipe(gulp.dest(options.dist));
 });
 
-gulp.task('manifest', ['html', 'svg'], function(){
+
+// gulp.task('buildJs', function () {
+//     return gulp.src('src/**/*.js', {since: cache.lastMtime('js')})
+//         .pipe(jshint())
+//         .pipe(cache('js'))
+//         .pipe(concat('app.js'))
+//         .pipe(dest('build'));
+// });
+
+// gulp.task('watch', function () {
+//     gulp.watch('src/**/*.js', gulp.series('buildJs'))
+//         .on('change', cache.update('js'));
+// });
+
+// gulp.task('build', gulp.series('buildJs', 'watch'));
+
+gulp.task('watchFiles', function() {
+    return gulp.watch(es6Path)
+        .on('change', cache.update('js'));
+});
+
+gulp.task('manifest', ['svg', 'html'], function(){
   return gulp.src([options.dist + '/**/*'])
     .pipe(manifest({
   relativePath: './',
       hash: true,
       preferOnline: true,
-      network: ['http://*', 'https://*', '*'],
+      // network: ['http://*', 'https://*', '*', 'http://*.*.*/*/*', 'https://*.*/*/*/*'],
       filename: 'memory.appcache',
       exclude: 'memory.appcache'
      }))
@@ -93,13 +130,14 @@ gulp.task('manifest', ['html', 'svg'], function(){
 });
 
 
-gulp.task('build', ['manifest'], function() {
+gulp.task('build', ['manifest', 'watchFiles'], function() {
     return gulp.src([
-            'index.html',
-            options.src + 'img/circuit4.svg'
+            // 'index.html'
         ], {
             base: options.src
         })
+        .pipe(bust())
+
         .pipe(gulp.dest(options.dist));
 });
 
@@ -111,6 +149,6 @@ gulp.task('deploy', function() {
 gulp.task('serve', ['watchFiles']);
 
 // Build task is a dependency of default task so can run command "gulp".
-gulp.task('default', ['clean', 'traceur'], function() {
+gulp.task('default', ['clean'], function() {
     gulp.start('build');
 });

@@ -5,6 +5,10 @@ body {
     background: transparent linear-gradient(to right, #a1d3b0, #f6f1d3) repeat scroll 0 0;
 }
 
+img {
+    max-width: 100%;
+}
+
 h1 {
     font-size: 48px;
     font-weight: 100;
@@ -13,35 +17,46 @@ h1 {
     text-transform: uppercase;
 }
 
-.card,
-.cardCategory {
-    display: inline-block;
-    width: 75px;
-    height: 75px;
-    margin: 5px;
-    padding: 10px;
+.wrap {
+    max-width: 900px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.card {
+    flex-grow: 1;
+    width: 20%;
+    flex-basis: 75px;
+    margin: 10px;
+    padding: 16px;
     opacity: 1;
     border: .5px solid rgb(41, 63, 80);
 }
 
 .matched {
-    display: inline-block;
-    width: 75px;
-    height: 75px;
-    margin: 5px;
-    padding: 10px;
+    flex-grow: 1;
+    width: 20%;
+    flex-basis: 75px;
+    margin: 10px;
+    padding: 16px;
     transition: opacity 3s;
     opacity: 0;
     border: .5px solid rgb(41, 63, 80);
 }
 
 .play {
-    display: inline-block;
-    width: 455px;
-    height: 451px;
-    padding-top: 12px;
+    width: 64%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
     opacity: 1;
+    padding: 10px;
     border: 1px solid rgb(100, 136, 128);
+    flex-wrap: wrap;
+    align-items: flex-start;
+    align-content: space-around;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 .win {
@@ -56,10 +71,34 @@ h1 {
 }
 
 .cardList {
-    padding: 0 300px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    opacity: 1;
+    padding: 10px;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    align-content: space-around;
+    margin-right: auto;
+    margin-left: auto;
 }
 
-.categories {
-    margin-top: 50px;
-    margin-bottom: 20px;
+.wrap2 {
+    max-width: 625px;
+    max-height: 1000px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.cardCategory {
+    flex-grow: 1;
+    height: 50px;
+    width: 5%;
+    flex-basis: 50px;
+    margin: 10px;
+    padding: 16px;
+    opacity: 1;
+    border: .5px solid rgb(41, 63, 80);
 }

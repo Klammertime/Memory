@@ -115,21 +115,18 @@ Card.prototype.flipCard = function(event) {
     }
 };
 
-
-Card.prototype.changeCardBack = function(category){
+Card.prototype.changeCardBack = function(category) {
     // grab all img els in #board
     var imgBackLocation = 'img/' + category + '/' + category + '1.svg';
 
     var imgList = document.querySelectorAll('img.card');
     // make it into an array
     var imgListArray = Array.prototype.slice.call(imgList);
-    console.log(imgListArray);
     // forEach it and replace .src with the below
-    imgListArray.forEach(function(val, ind, arr){
+    imgListArray.forEach(function(val, ind, arr) {
         val.src = imgBackLocation;
     })
 };
-
 
 document.getElementById('board').addEventListener('click', card.flipCard, false);
 
@@ -153,7 +150,6 @@ instead of the card choice number. Event listener needs to be on dragstart for d
 document.getElementById('cardCategories').addEventListener('dragstart', function(event) {
     card.handleDragStart(event);
 }, false);
-
 
 document.getElementById('board').addEventListener('dragover', card.handleDragOver, false);
 document.getElementById('board').addEventListener('drop', card.handleDragDrop, false);

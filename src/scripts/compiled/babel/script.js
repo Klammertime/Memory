@@ -125,7 +125,6 @@ Card.prototype.changeCardBack = function (category) {
     var imgList = document.querySelectorAll('img.card');
     // make it into an array
     var imgListArray = Array.prototype.slice.call(imgList);
-    console.log(imgListArray);
     // forEach it and replace .src with the below
     imgListArray.forEach(function (val, ind, arr) {
         val.src = imgBackLocation;
