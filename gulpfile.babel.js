@@ -94,7 +94,6 @@ gulp.task('watchFiles', function() {
 
 gulp.task('build', ['svg', 'html', 'watchFiles'], function() {
     return gulp.src([
-      'memory.appcache'
         ], {
             base: options.src
         })
