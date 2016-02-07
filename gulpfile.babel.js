@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
     var gulp = require('gulp'),
          del = require('del'),
        pages = require('gulp-gh-pages'),
@@ -19,12 +19,30 @@
       cache  = require('gulp-memory-cache'),
       gulpcached = require('gulp-cached'),
      es6Path = 'src/scripts/script.js',
- compilePath = 'src/scripts/compiled';
+ compilePath = 'src/scripts/compiled',
+ browserSync = require('browser-sync'),
+      jshint = require('gulp-jshint'),
+        jscs = require('gulp-jscs');
 
 var options = {
     dist: 'dist',
     src: 'src'
 };
+
+// from pluralsight course
+gulp.task('vet', function() {
+    return gulp
+      .src([
+      './src/**/*.js',
+      // gets anything at root such as gulpfile.js
+      './*.js'
+      ])
+      .pipe(jscs())
+      .pipe(jshint())
+      // jshint needs a reporter, pass flag verbose true
+      // tells w code about error
+    .pipe(jshint.reporter('jshint-stylish', {verbose: true}));
+});
 
 var index = 1;
 
@@ -102,11 +120,47 @@ gulp.task('build', ['svg', 'html', 'watchFiles'], function() {
 });
 
 gulp.task('deploy', function() {
-    return gulp.src(options.dist + '/*')
+    return gulp.src(options.dist + '/**/*')
     .pipe(pages());
 });
 
-gulp.task('serve', ['watchFiles']);
+gulp.task('serve', ['watchFiles'], function() {
+  startBrowserSync();
+});
+
+function startBrowserSync() {
+  // check to see if it's already running, several tabs open etc
+  if(browserSync.active) {
+    return;
+  }
+
+  // console.log('Starting browser-sync on port' + port);
+
+  var options = {
+    proxy: 'localhost:' + port,
+    port: 3000,
+    // were saying watch anything that moves, but limiting
+    // it to client folder - wait, i don't have a client
+    // folder or do I?
+    files: [options.src + '**/**.*'],
+      ghostMode: {
+        clicks: true,
+        location: false,
+        forms: true,
+        scroll: true
+      },
+    injectChanges: true,
+    logFileChanges: true,
+    logLevel: 'debug',
+    logPrefix: 'gulp-patterns',
+    notify: true,
+    // have to watch some files and load after them
+    reloadDelay: 1000
+  };
+}
+
+
+
 
 // Build task is a dependency of default task so can run command "gulp".
 gulp.task('default', ['clean'], function() {

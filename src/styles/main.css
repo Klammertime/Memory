@@ -1,3 +1,6 @@
+/* treehouse said never use @import?? he said use hosted service which is faster
+than any web host you can buy, more things can get from other servers the better  says include on html page*/
+
 @import url(https://fonts.googleapis.com/css?family=Lato:100,300,400);
 body {
     font: 300 16px/22px 'Lato', 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -17,85 +20,86 @@ h1 {
     text-transform: uppercase;
 }
 
-.wrap {
-    max-width: 900px;
+.wrap,
+.wrap2 {
     margin-right: auto;
     margin-left: auto;
 }
 
-.card {
-    flex-grow: 1;
-    width: 20%;
-    flex-basis: 75px;
-    margin: 10px;
-    padding: 16px;
-    opacity: 1;
-    border: .5px solid rgb(41, 63, 80);
+.wrap {
+    max-width: 900px;
 }
 
-.matched {
-    flex-grow: 1;
-    width: 20%;
-    flex-basis: 75px;
-    margin: 10px;
-    padding: 16px;
-    transition: opacity 3s;
-    opacity: 0;
-    border: .5px solid rgb(41, 63, 80);
+.wrap2 {
+    max-width: 625px;
+    max-height: 1000px;
 }
 
-.play {
-    width: 64%;
+.play,
+.win .cardList {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    opacity: 1;
-    padding: 10px;
-    border: 1px solid rgb(100, 136, 128);
     flex-wrap: wrap;
     align-items: flex-start;
     align-content: space-around;
     margin-right: auto;
     margin-left: auto;
+    padding: 10px;
+}
+
+.play,
+.win {
+    width: 64%;
+    border: 1px solid rgb(100, 136, 128);
+}
+
+.play {
+    opacity: 1;
 }
 
 .win {
-    display: inline-block;
-    width: 474px;
-    height: 458px;
-    padding-top: 12px;
     transition: opacity 3s;
     opacity: 0;
-    border: 1px solid rgb(100, 136, 128);
     background: #f6f1d3;
 }
 
 .cardList {
     width: 100%;
     height: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
     opacity: 1;
-    padding: 10px;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    align-content: space-around;
-    margin-right: auto;
-    margin-left: auto;
 }
 
-.wrap2 {
-    max-width: 625px;
-    max-height: 1000px;
-    margin-right: auto;
-    margin-left: auto;
+.graphic {
+    flex-grow: 1;
+    width: 20%;
+    flex-basis: 75px;
+    margin: 10px;
+    padding: 16px;
+    border: .5px solid rgb(41, 63, 80);
+}
+
+.card,
+.matched {
+    flex-grow: 1;
+    flex-basis: 75px;
+    max-height: 75px;
+    max-width: 75px;
+}
+
+.card {
+    opacity: 1;
+}
+
+.matched {
+    transition: opacity 3s;
+    opacity: 0;
 }
 
 .cardCategory {
     flex-grow: 1;
-    height: 50px;
-    width: 5%;
+    max-height: 76px;
+    width: 13%;
     flex-basis: 50px;
     margin: 10px;
     padding: 16px;

@@ -1,7 +1,7 @@
 /*
  * Memory Game
  */
-"use strict";
+'use strict';
 
 // Sources array contains img'file names with corresponding alt attribute.
 
@@ -39,14 +39,17 @@ card.createSources('robots');
 Array.prototype.shuffle = function () {
     var i = this.length;
     var j;
-    if (i === 0) return this;
-    while (--i) {
-        j = Math.floor(Math.random() * (i + 1));
-        var _ref = [this[j], this[i]];
-        this[i] = _ref[0];
-        this[j] = _ref[1];
+    if (i === 0) {
+        return this;
+    } else {
+        while (--i) {
+            j = Math.floor(Math.random() * (i + 1));
+            var _ref = [this[j], this[i]];
+            this[i] = _ref[0];
+            this[j] = _ref[1];
+        }
+        return this;
     }
-    return this;
 };
 
 // Array deck represents cards.
@@ -55,8 +58,7 @@ deck = [];
 image = {};
 
 Card.prototype.initGame = function () {
-    // In deck: each image represented twice;
-    // contains index of cooresponding image in sources array.
+    // In deck: each image represented twice; contains index of corresponding image in sources array.
     for (var i = 0; i < sources.length; i++) {
         deck.push(i);
         deck.push(i);
@@ -135,7 +137,6 @@ document.getElementById('board').addEventListener('click', card.flipCard, false)
 
 Card.prototype.handleDragStart = function (event) {
     this.createSources(event.target.id);
-    // this.changeCardBack(event.target.id);
 };
 
 Card.prototype.handleDragDrop = function (event) {
