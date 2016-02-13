@@ -5,7 +5,8 @@ than any web host you can buy, more things can get from other servers the better
 body {
     font: 300 16px/22px 'Lato', 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     text-align: center;
-    background: transparent linear-gradient(to right, #a1d3b0, #f6f1d3) repeat scroll 0 0;
+    /* wood bg from: http://codepen.io/AndrewCreech/pen/iqGoj */
+    background: url(https://dl.dropbox.com/u/47224881/Demo/wood-tile-background.jpg);
 }
 
 img {
@@ -14,7 +15,7 @@ img {
 
 h1 {
     font-size: 48px;
-    font-weight: 100;
+    font-weight: 400;
     margin-bottom: 40px;
     letter-spacing: .5px;
     text-transform: uppercase;
@@ -31,12 +32,12 @@ h1 {
 }
 
 .wrap2 {
-    max-width: 625px;
-    max-height: 1000px;
+    max-width: 388px;
 }
 
 .play,
-.win .cardList {
+.win,
+.cardList {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -51,12 +52,11 @@ h1 {
 .play,
 .win {
     width: 64%;
-    border: 1px solid rgb(100, 136, 128);
 }
 
-.play {
+/*.play {
     opacity: 1;
-}
+}*/
 
 .win {
     transition: opacity 3s;
@@ -70,13 +70,27 @@ h1 {
     opacity: 1;
 }
 
+/* glass css adapted from http://codepen.io/shakdaniel/pen/rhIKG */
 .graphic {
     flex-grow: 1;
     width: 20%;
+    max-height: 75px;
     flex-basis: 75px;
     margin: 10px;
-    padding: 16px;
-    border: .5px solid rgb(41, 63, 80);
+    padding: 4%;
+    text-align: center;
+    color: rgba(255, 255, 255, .8);
+    text-shadow: 1px 1px 2px rgba(132, 112, 255, .8), -1px -1px 1px rgba(175, 238, 238, .8);
+    text-transform: Uppercase;
+    border: 1px solid rgba(255, 255, 255, .8);
+    box-shadow: inset 1px 4px 8px -2px rgba(132, 112, 255, .2), inset -1px -4px 4px -2px rgba(175, 238, 238, .7), -2px -2px 10px -2px rgba(132, 112, 255, .3), 0 10px 10px -10px rgba(0, 0, 0, .75);
+    background: linear-gradient(-10deg, rgba(255, 255, 255, .1) 0%, rgba(255, 255, 255, .2) 25%, rgba(255, 255, 255, .4) 50%, rgba(255, 255, 255, .5) 50%, rgba(255, 255, 255, .2) 75%, rgba(255, 255, 255, .1) 100%);
+    transition: all .25s ease-in-out;
+    -webkit-transition: all .25s ease-in-out;
+    -moz-transition: all .25s ease-in-out;
+    -o-transition: all .25s ease-in-out;
+    -ms-transition: all .25s ease-in-out;
+    cursor: pointer;
 }
 
 .card,
@@ -88,7 +102,7 @@ h1 {
 }
 
 .card {
-    opacity: 1;
+    opacity: .9;
 }
 
 .matched {
@@ -97,12 +111,71 @@ h1 {
 }
 
 .cardCategory {
-    flex-grow: 1;
-    max-height: 76px;
-    width: 13%;
-    flex-basis: 50px;
-    margin: 10px;
-    padding: 16px;
-    opacity: 1;
-    border: .5px solid rgb(41, 63, 80);
+    opacity: .7;
 }
+.paper-stack,
+.paper-stack:before,
+.paper-stack:after {
+    background: linear-gradient(-10deg, rgba(255, 255, 255, .1) 0%, rgba(255, 255, 255, .2) 25%, rgba(255, 255, 255, .4) 50%, rgba(255, 255, 255, .5) 50%, rgba(255, 255, 255, .2) 75%, rgba(255, 255, 255, .1) 100%);
+    border: 1px solid #ccc;
+}
+
+.paper-stack {
+    position: relative;
+    width: 9%;
+    padding: 25px;
+    margin: 16px;
+    max-height: 76px;
+    flex-grow: 1;
+}
+
+.paper-stack:before,
+.paper-stack:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    -webkit-transform: rotateZ(1deg);
+    -o-transform: rotate(1deg);
+    transform: rotateZ(1deg);
+    z-index: -1;
+    left: 10px;
+    top: 7px;
+}
+
+.paper-stack:after {
+    -webkit-transform: rotateZ(0.5deg);
+    -o-transform: rotate(0.5deg);
+    transform: rotateZ(0.5deg);
+    left: 5px;
+    top: 3px;
+}
+
+/* engraved font adapted from http://codepen.io/lisa_c/pen/azbPNV */
+.engraved-font {
+    color: #A88156;
+/*    background-color: #5D8D89;
+*/    text-shadow: 0px 1px 0px rgba(255,255,255,.3), 0px -1px 0px rgba(0,0,0,.7);
+}
+p {
+    margin: 5px 30px 15px;
+    font-family:"Century Gothic", "HelveticaNeueLT Pro 45 Lt", sans-serif;
+}
+.engraved div {
+height: 65px;
+    line-height: 60px;
+    font-family: "Century Gothic", "Helvetica", sans-serif;
+    font-size: 50px;
+    font-weight: bold;
+    text-align: center;
+}
+/** cool pens and ideas
+or for portfolio!
+* http://codepen.io/lloydwheeler/pen/JzunL
+*
+*
+*
+*
+*/
