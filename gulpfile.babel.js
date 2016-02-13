@@ -1,103 +1,128 @@
 'use strict';
-    var gulp = require('gulp'),
-         del = require('del'),
-       pages = require('gulp-gh-pages'),
-      rename = require('gulp-rename'),
-          fs = require('fs'),
-        path = require('path'),
-       babel = require('gulp-babel'),
-     plumber = require('gulp-plumber'),
-      useref = require('gulp-useref'),
-      uglify = require('gulp-uglify'),
-      gulpif = require('gulp-if'),
-   minifyCss = require('gulp-minify-css'),
-      svgmin = require('gulp-svgmin'),
-    // manifest = require('gulp-appcache'),
-        bust = require('gulp-buster'),
-      jshint = require('gulp-jshint'),
-      flexSvg = require('gulp-flex-svg'),
-      cache  = require('gulp-memory-cache'),
-      gulpcached = require('gulp-cached'),
-     es6Path = 'src/scripts/script.js',
- compilePath = 'src/scripts/compiled',
- browserSync = require('browser-sync'),
-      jshint = require('gulp-jshint'),
-        jscs = require('gulp-jscs');
+var gulp = require('gulp');
+var args = require('yargs').argv;
+var del = require('del');
 
-var options = {
-    dist: 'dist',
-    src: 'src'
-};
+/* gets file gulp.config and gets config, but since the function
+* was not executed yet, we execute it here: */
+  var config = require('./gulp.config')();
+/* Gets plugins as being used creates variable using $.
+* name of plugin after 'gulp-',
+* TODO: what about ones with a 2nd dash, i think camelcase works */
+  var $ = require('gulp-load-plugins')({lazy: true});
 
 // from pluralsight course
 gulp.task('vet', function() {
+  log('Analyzing source with JSHint and JSCS');
+
     return gulp
-      .src([
-      './src/**/*.js',
-      // gets anything at root such as gulpfile.js
-      './*.js'
-      ])
-      .pipe(jscs())
-      .pipe(jshint())
+      .src(config.alljs)
+      // if we type --verbose in command line
+      // it will print, args lets you pass in
+      // command line arguments
+      .pipe($.if(args.verbose, $.print()))
+      .pipe($.jscs())
+      .pipe($.jshint())
       // jshint needs a reporter, pass flag verbose true
       // tells w code about error
-    .pipe(jshint.reporter('jshint-stylish', {verbose: true}));
+      .pipe($.jshint.reporter('jshint-stylish', {verbose: true}))
+      .pipe($.jshint.reporter('fail'));
 });
 
-var index = 1;
+gulp.task('styles', ['clean-styles'], function() {
+  log('Compiling Sass --> CSS');
+
+  return gulp
+      .src(config.sass)
+      // plumber good way to keep piping working & show error messages
+      .pipe($.plumber())
+      .pipe($.scss())
+      // get last 2 versions of browsers, and only >5% of the market
+      .pipe($.autoprefixer({broswers: ['last 2 versions', '> 5%']}))
+      .pipe(gulp.dest(config.temp));
+});
+
+// use done as callback so that since styles needs to wait
+// for 'clean-styles' to be done first, del takes a 2nd param
+// that is a callback fcn seen in cleanFiles
+gulp.task('clean-styles', function(done) {
+    var files = config.temp + '**/*.css';
+    cleanFiles(files, done);
+});
+
+gulp.task('sass-watcher', function() {
+  gulp.watch([config.sass], ['styles']);
+});
+
+gulp.task('wiredep', function() {
+  var options = config.getWiredepDefaultOptions(); //TODO
+  var wiredep = require('wiredep').stream;
+
+    return gulp
+        .src(config.index) //TODO index.html
+        .pipe(wiredep(options))
+        .pipe($.inject(gulp.src(config.js)))
+        .pipe(gulp.dest(config.client)); //TODO
+});
+
+function cleanFiles(path, done) {
+  log('Cleaning: ' + $.util.colors.blue(path));
+  del(path, done); // del has callback as 2nd param
+}
 
 gulp.task('renameImages', function() {
-    return gulp.src(options.src + '/img/*/*')
-        .pipe(rename(function(path) {
+  var index = 1;
+    return gulp.src(config.client + 'img/*/*')
+        .pipe($.rename(function(path) {
             if (index > 10) {
                 index = 1;
             }
             path.basename = path.dirname + index++;
         }))
-        .pipe(gulp.dest(options.src + '/img'));
+        .pipe(gulp.dest(config.client + 'img'));
 });
 
 // SVG optimization task
 gulp.task('svg', ['renameImages'], function () {
-  return gulp.src(options.src + '/img/*/*')
-    .pipe(svgmin())
-    .pipe(flexSvg())
+  return gulp.src(config.client + 'img/*/*')
+    .pipe($.svgmin())
+    .pipe($.flexSvg())
 
-    .pipe(gulp.dest(options.dist + '/img'));
+    .pipe(gulp.dest(config.dist + '/img'));
 });
 
 gulp.task('babel', function() {
-    return gulp.src([es6Path])
-        .pipe(plumber())
-        .pipe(babel())
-        .pipe(gulp.dest(compilePath + '/babel'));
+    return gulp.src([config.es6Path])
+        .pipe($.plumber())
+        .pipe($.babel())
+        .pipe(gulp.dest(config.compilePath + 'babel'));
 });
 
 // Create clean task.
 gulp.task('clean', function() {
-    return del([options.dist]);
+    return del([config.dist]);
 });
 
 // Takes html file and runs through useref, tells html
 // what script and style files have based on index.html
 gulp.task('html', ['babel'], function() {
-    return gulp.src(options.src + '/index.html', {since: cache.lastMtime('js')})
-        .pipe(useref())
-        .pipe(gulpif('*.js', gulpcached('linting')))
-        .pipe(gulpif('*.js', jshint()))
-        .pipe(gulpif('*.js', jshint.reporter()))
-        .pipe(gulpif('*.js', uglify()))
-        .pipe(gulpif('*.css', minifyCss()))
-        .pipe(gulp.dest(options.dist));
+    return gulp.src(config.client + 'index.html', {since: $.memoryCache.lastMtime('js')})
+        .pipe($.useref())
+        .pipe($.if('*.js', $.cached('linting')))
+        .pipe($.if('*.js', $.jshint()))
+        .pipe($.if('*.js', $.jshint.reporter()))
+        .pipe($.if('*.js', $.uglify()))
+        .pipe($.if('*.css', $.minifyCss()))
+        .pipe(gulp.dest(config.dist));
 });
 
-gulp.task('watchFiles', function() {
-    return gulp.watch(es6Path)
-        .on('change', cache.update('js'));
-});
+// gulp.task('watchFiles', function() {
+//     return gulp.watch(es6Path)
+//         .on('change', $.cache.update('js'));
+// });
 
 // gulp.task('manifest', ['svg', 'html'], function(){
-//   return gulp.src([options.dist + '/**/*'])
+//   return gulp.src([config.dist + '/**/*'])
 //     .pipe(manifest({
 //   relativePath: './',
 //       hash: true,
@@ -106,35 +131,35 @@ gulp.task('watchFiles', function() {
 //       filename: 'memory.appcache',
 //       exclude: 'memory.appcache'
 //      }))
-//     .pipe(gulp.dest(options.dist));
+//     .pipe(gulp.dest(config.dist));
 // });
 
 
-gulp.task('build', ['svg', 'html', 'watchFiles'], function() {
+gulp.task('build', ['svg', 'html'], function() {
     return gulp.src([
         ], {
-            base: options.src
+            base: config.client
         })
-        .pipe(bust())
-        .pipe(gulp.dest(options.dist));
+        .pipe($.buster())
+        .pipe(gulp.dest(config.dist));
 });
 
 gulp.task('deploy', function() {
-    return gulp.src(options.dist + '/**/*')
-    .pipe(pages());
+    return gulp.src(config.dist + '/**/*')
+    .pipe($.ghPages());
 });
 
-gulp.task('serve', ['watchFiles'], function() {
+gulp.task('serve', function() {
   startBrowserSync();
 });
 
 function startBrowserSync() {
   // check to see if it's already running, several tabs open etc
-  if(browserSync.active) {
+  if($.browserSync.active) {
     return;
   }
 
-  // console.log('Starting browser-sync on port' + port);
+  log('Starting browser-sync on port' + port);
 
   var options = {
     proxy: 'localhost:' + port,
@@ -142,7 +167,7 @@ function startBrowserSync() {
     // were saying watch anything that moves, but limiting
     // it to client folder - wait, i don't have a client
     // folder or do I?
-    files: [options.src + '**/**.*'],
+    files: [config.client + '**/**.*'],
       ghostMode: {
         clicks: true,
         location: false,
@@ -159,7 +184,19 @@ function startBrowserSync() {
   };
 }
 
-
+////////////
+// Logging method that's reusable
+function log(msg) {
+  if (typeof(msg) === 'object') {
+    for (var item in msg) {
+      if (msg.hasOwnProperty(item)) {
+          $.util.log($.util.colors.blue(msg[item]));
+      }
+    }
+   } else {
+      $.util.log($.util.colors.blue(msg));
+   }
+}
 
 
 // Build task is a dependency of default task so can run command "gulp".
