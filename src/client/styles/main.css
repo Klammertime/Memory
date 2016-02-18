@@ -1,7 +1,3 @@
-/* treehouse said never use @import?? he said use hosted service which is faster
-than any web host you can buy, more things can get from other servers the better  says include on html page*/
-
-@import url(https://fonts.googleapis.com/css?family=Lato:100,300,400);
 body {
     font: 300 16px/22px 'Lato', 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     text-align: center;
@@ -32,7 +28,6 @@ h1 {
 }
 
 .wrap2 {
-    /*    max-width: 388px;*/
     max-width: 583px;
 }
 
@@ -69,7 +64,6 @@ h1 {
 
 
 /* glass css adapted from http://codepen.io/shakdaniel/pen/rhIKG */
-
 .graphic {
     flex-grow: 1;
     width: 20%;

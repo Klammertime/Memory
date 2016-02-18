@@ -2,6 +2,8 @@
 var gulp = require('gulp');
 var args = require('yargs').argv;
 var del = require('del');
+var es6Path = './src/client/scripts/script.js';
+
 
 /* gets file gulp.config and gets config, but since the function
 * was not executed yet, we execute it here: */
@@ -29,18 +31,18 @@ gulp.task('vet', function() {
       .pipe($.jshint.reporter('fail'));
 });
 
-gulp.task('styles', ['clean-styles'], function() {
-  log('Compiling Sass --> CSS');
+// gulp.task('styles', ['clean-styles'], function() {
+//   log('Compiling Sass --> CSS');
 
-  return gulp
-      .src(config.sass)
-      // plumber good way to keep piping working & show error messages
-      .pipe($.plumber())
-      .pipe($.scss())
-      // get last 2 versions of browsers, and only >5% of the market
-      .pipe($.autoprefixer({broswers: ['last 2 versions', '> 5%']}))
-      .pipe(gulp.dest(config.temp));
-});
+//   return gulp
+//       .src(config.sass)
+//       // plumber good way to keep piping working & show error messages
+//       .pipe($.plumber())
+//       .pipe($.scss())
+//       // get last 2 versions of browsers, and only >5% of the market
+//       .pipe($.autoprefixer({broswers: ['last 2 versions', '> 5%']}))
+//       .pipe(gulp.dest(config.temp));
+// });
 
 // use done as callback so that since styles needs to wait
 // for 'clean-styles' to be done first, del takes a 2nd param
@@ -50,20 +52,20 @@ gulp.task('clean-styles', function(done) {
     cleanFiles(files, done);
 });
 
-gulp.task('sass-watcher', function() {
-  gulp.watch([config.sass], ['styles']);
-});
+// gulp.task('sass-watcher', function() {
+//   gulp.watch([config.sass], ['styles']);
+// });
 
-gulp.task('wiredep', function() {
-  var options = config.getWiredepDefaultOptions(); //TODO
-  var wiredep = require('wiredep').stream;
+// gulp.task('wiredep', function() {
+//   var options = config.getWiredepDefaultOptions(); //TODO
+//   var wiredep = require('wiredep').stream;
 
-    return gulp
-        .src(config.index) //TODO index.html
-        .pipe(wiredep(options))
-        .pipe($.inject(gulp.src(config.js)))
-        .pipe(gulp.dest(config.client)); //TODO
-});
+//     return gulp
+//         .src(config.index) //TODO index.html
+//         .pipe(wiredep(options))
+//         .pipe($.inject(gulp.src(config.js)))
+//         .pipe(gulp.dest(config.client)); //TODO
+// });
 
 function cleanFiles(path, done) {
   log('Cleaning: ' + $.util.colors.blue(path));
@@ -92,7 +94,7 @@ gulp.task('svg', ['renameImages'], function () {
 });
 
 gulp.task('babel', function() {
-    return gulp.src([config.es6Path])
+    return gulp.src([es6Path])
         .pipe($.plumber())
         .pipe($.babel())
         .pipe(gulp.dest(config.compilePath + 'babel'));
@@ -106,7 +108,7 @@ gulp.task('clean', function() {
 // Takes html file and runs through useref, tells html
 // what script and style files have based on index.html
 gulp.task('html', ['babel'], function() {
-    return gulp.src(config.client + 'index.html', {since: $.memoryCache.lastMtime('js')})
+    return gulp.src(config.client + 'index.html')
         .pipe($.useref())
         .pipe($.if('*.js', $.cached('linting')))
         .pipe($.if('*.js', $.jshint()))

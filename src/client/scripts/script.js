@@ -154,12 +154,3 @@ document.getElementById('cardCategories').addEventListener('dragstart', function
 
 document.getElementById('board').addEventListener('dragover', card.handleDragOver, false);
 document.getElementById('board').addEventListener('drop', card.handleDragDrop, false);
-
-/* test code to see babel output */
-class Car {
-
-    constructor(engine) {
-        this.engine = engine;
-    }
-
-}
