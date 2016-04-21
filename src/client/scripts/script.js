@@ -1,7 +1,7 @@
 /*
  * Memory Game
  */
-!function() {
+! function() {
     'use strict';
 
     // Sources array contains img'file names with corresponding alt attribute.
@@ -137,16 +137,16 @@
     };
 
     Card.prototype.handleDragDrop = function(event) {
-        if (event.preventDefault){
+        if (event.preventDefault) {
             event.preventDefault();
         }
     };
 
     // Neccessary to make drop work, weird but necessary.
     Card.prototype.handleDragOver = function(event) {
-        if(event.preventDefault) {
-             event.preventDefault();
-         }
+        if (event.preventDefault) {
+            event.preventDefault();
+        }
         return false;
     };
 
