@@ -1,7 +1,7 @@
 /*
  * Memory Game
  */
-! function() {
+(function() {
     'use strict';
 
     // Sources array contains img'file names with corresponding alt attribute.
@@ -36,8 +36,9 @@
 
     // Shuffle method called on any array to shuffle it in place.
     Array.prototype.shuffle = function() {
-        var i = this.length;
-        var j;
+        var j,
+            i = this.length;
+
         if (i === 0) {
             return this;
         } else {
@@ -56,14 +57,13 @@
 
     Card.prototype.initGame = function() {
         // In deck: each image represented twice; contains index of corresponding image in sources array.
-        for (var i = 0; i < sources.length; i++) {
+        for (var i = 0, s = sources.length; i < s; i++) {
             deck.push(i);
             deck.push(i);
         }
-        // Shuffle deck array created above.
         deck.shuffle();
         // Assign an image (denoted by the index) to each card element.
-        for (var j = 0; j < 2 * sources.length; j++) {
+        for (var j = 0, l = 2 * sources.length; j < l; j++) {
             image['card_' + j] = deck[j];
         }
     };
@@ -118,13 +118,13 @@
     };
 
     Card.prototype.changeCardBack = function(category) {
-        // grab all img els in #board
-        var imgBackLocation = 'img/' + category + '/' + category + '1.svg';
+        var imgBackLocation,
+            imgList,
+            imgListArray;
 
-        var imgList = document.querySelectorAll('img.card');
-        // make it into an array
-        var imgListArray = Array.prototype.slice.call(imgList);
-        // forEach it and replace .src with the below
+        imgBackLocation = 'img/' + category + '/' + category + '1.svg';
+        imgList = document.querySelectorAll('img.card');
+        imgListArray = Array.prototype.slice.call(imgList);
         imgListArray.forEach(function(val, ind, arr) {
             val.src = imgBackLocation;
         });
@@ -158,4 +158,4 @@
 
     document.getElementById('board').addEventListener('dragover', card.handleDragOver, false);
     document.getElementById('board').addEventListener('drop', card.handleDragDrop, false);
-}();
+}());
