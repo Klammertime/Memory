@@ -1,21 +1,16 @@
-# Memory Game
-This project was originally created for CS-22A and then improved later to add svg graphics, drag & drop technology and responsive web design using Flexbox.
+#Memory Game
+I created a memory game using ES6, Node.js and HTML5 application cache. 
+This project was originally created for JavaScript for Programmers at Foothill College and then improved later to add SVG graphics, HTML5 Drag & Drop API and responsive web design using Flexbox. (This project is post-review.)
 
-**CS-22A: Memory Game** ~ Foothill College JavaScript for Programmers
-
-**Directions**: Build a memory game using ES6, Node.js and HTML5 application cache. (This project is post-review.)
+###[**~PLAY MEMORY ONLINE HERE~**](http://klammertime.github.io/Memory/)
 
 Usage
 -----
-Navigate to project hosted on github.com [**here**](http://klammertime.github.io/Memory/)
-
-**OR**
-
 1. Clone this repository
 2. Navigate to the dist folder. Open your local copy of index.html through your web browser 
 
 ##Technologies Used
-ECMAScript 5 & 6, jQuery, Flexbox, HTML5 application cache, SVG images, Gulp, Babel transpiler, and Node.js.
+ECMAScript 5 & 6, jQuery, Flexbox, HTML5 application cache, SVG images, Gulp, Babel transpiler, Node.js, and HTML5 Drag & Drop API
 
 ##Resources
 * All vector icons designed by [Freepik](http://www.freepik.com/free-icons)
